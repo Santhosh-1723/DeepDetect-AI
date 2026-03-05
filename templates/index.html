@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>DeepDetect – AI Deepfake Detection</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🛡 DeepDetect AI</h1>
+
+<p class="subtitle">
+AI-powered deepfake detection system designed to analyze facial patterns and detect manipulated images.
+</p>
+
+<form action="/predict" method="post" enctype="multipart/form-data">
+
+<input type="file" name="image" id="imageInput" required onchange="previewImage(event)">
+
+<label for="imageInput" class="upload-btn">
+Upload Image
+</label>
+
+<img id="preview">
+
+<button type="submit">Analyze Image</button>
+
+</form>
+
+{% if prediction %}
+
+<div class="result-box">
+
+<h2>{{ prediction }}</h2>
+
+<p class="confidence">
+Confidence Score: {{ confidence }}%
+</p>
+
+<p class="explanation">
+The system analyzes facial structure, pixel distribution, and visual artifacts
+commonly found in manipulated images.
+</p>
+
+</div>
+
+{% endif %}
+
+<div class="info-box">
+
+<h3>How DeepDetect Works</h3>
+
+<p>
+DeepDetect uses a Convolutional Neural Network (CNN) trained on real and manipulated
+facial datasets. The model learns patterns that reveal digital manipulation,
+helping detect potential deepfake images.
+</p>
+
+</div>
+
+<div class="footer">
+
+<p>
+⚠️ This project is a research prototype built for educational purposes.
+Detection accuracy may vary depending on image quality and manipulation methods.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function previewImage(event){
+
+const preview=document.getElementById("preview")
+
+preview.src=URL.createObjectURL(event.target.files[0])
+
+}
+
+</script>
+
+</body>
+
+</html>
